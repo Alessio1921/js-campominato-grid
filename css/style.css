@@ -1,0 +1,27 @@
+body{
+  background-color: #001632;
+  color: white;
+}
+.my-container{
+  width: 800px;
+}
+.grid{
+  width: 600px;
+  height: 600px;
+}
+.square{
+  border: 3px solid white;
+  display: inline-block;
+}
+.easy{
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+}
+.middle{
+  width: calc(100% / 8);
+  height: calc(100% / 10);
+}
+.hard{
+  width: calc(100% / 5);
+  height: calc(100% / 5);
+}
