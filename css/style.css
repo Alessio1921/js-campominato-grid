@@ -5,10 +5,19 @@ body{
 .my-container{
   width: 800px;
 }
-.grid{
+.grid-easy{
   width: 600px;
   height: 600px;
 }
+.grid-middle{
+  width: 500px;
+  height: 500px;
+}
+.grid-hard{
+  width: 500px;
+  height: 500px;
+}
+
 .square{
   border: 3px solid white;
   display: inline-block;
@@ -18,10 +27,13 @@ body{
   height: calc(100% / 10);
 }
 .middle{
-  width: calc(100% / 8);
-  height: calc(100% / 10);
+  width: calc(100% / 9);
+  height: calc(100% / 9);
 }
 .hard{
-  width: calc(100% / 5);
-  height: calc(100% / 5);
+  width: calc(100% / 7);
+  height: calc(100% / 7);
+}
+.active{
+  background-color: #00df6b;
 }
