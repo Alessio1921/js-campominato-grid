@@ -1,6 +1,4 @@
-let gridContainer=document.querySelector(".grid-easy");
-// let gridContainerMidd=document.querySelector(".grid-middle");
-// let gridContainerHard=document.querySelector(".grid-hard");
+let gridContainer=document.querySelector(".grid");
 let choiseUser;
 
 document.querySelector('button').addEventListener('click', function(){
@@ -20,24 +18,46 @@ document.querySelector('button').addEventListener('click', function(){
   else {
     numberSquare=49;
   }
+  const bomb=generateBombs(numberSquare);
+  console.log(bomb);
+  let score=0;
+  let totalSquare=document.getElementsByClassName("square");
   for (let i = 0; i < numberSquare; i++) {
-    squares= createSquare();
+    squares= createSquare(i);
     squares.classList.add(`${choiseUser}`); 
     gridContainer.appendChild(squares);
     gridContainer.classList.remove("d-none");
     // added click to square
-    squares.addEventListener('click', function(){
-      this.classList.add("active");
+    
+    squares.addEventListener('click', function oneClick(){
+      if(!bomb.includes(i)){
+        this.classList.add("active");
+        score++;
+        document.getElementById("score").innerHTML=score;
+        this.removeEventListener('click', oneClick);
+      }
+      else{
+        this.classList.add("lose");
+        document.getElementById("score").innerHTML=`${score}. Hai perso!`;
+        for (let i = 0; i < bomb.length; i++) {
+          totalSquare[bomb[i]].classList.add("lose");
+        }
+      }
     })
   }
+
 })
+
+
+
 /** function that creates a div with class square
  * 
  * @returns 
  */
-function createSquare() {
+function createSquare(number) {
   let square=document.createElement('div');
   square.classList.add("square");
+  square.innerHTML = `<span>${number}</span>`;
   return square;
 }
 /**function that adds the class d-none
@@ -48,4 +68,35 @@ function createSquare() {
 function reset(gridTemp){
   gridTemp.classList.add("d-none");
   return gridTemp;
+}
+/**
+ * 
+ * @param {*} numSquares 
+ * @returns 
+ */
+function generateBombs(numSquares){
+  const bombs=[];
+  for (let i = 0; i < 16; i++) {
+    bombs.push(random(bombs,0,numSquares))
+  } 
+  return bombs;
+}
+
+/**
+ * 
+ * @param {*} numbBlack 
+ * @param {*} min 
+ * @param {*} max 
+ * @returns 
+ */
+function random(numbBlack,min ,max){
+  let numberTemp;
+  let check=false;
+  while (!check) {
+    numberTemp=Math.floor(Math.random() * ((max + 1) - min) + min);
+    if(!numbBlack.includes(numberTemp)){
+      check=true;
+    }
+  }
+  return numberTemp;
 }
